@@ -70,13 +70,15 @@ export interface JlcBoardConstruction {
   material?: PcbBoard["material"]
 }
 
-export function getJlcStackup(
-  construction: JlcBoardConstruction,
-): JlcStackup | undefined {
+export function getJlcStackup({
+  num_layers,
+  thickness,
+  material = "fr4",
+}: JlcBoardConstruction): JlcStackup | undefined {
   return jlcStackups.find(
     (stackup) =>
-      stackup.num_layers === construction.num_layers &&
-      stackup.thickness === construction.thickness &&
-      stackup.material === (construction.material ?? "fr4"),
+      stackup.num_layers === num_layers &&
+      stackup.thickness === thickness &&
+      stackup.material === material,
   )
 }

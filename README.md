@@ -1,6 +1,6 @@
 # jlcpcb-manufacturing-specs
 
-Typed JLCPCB manufacturing tolerances and physical stackups for `tscircuit` and `circuit-json`.
+Typed JLCPCB manufacturing tolerances for `tscircuit` and `circuit-json`.
 
 This package exports reusable tolerance maps keyed by `PcbBoard` constraint
 fields so board rules can be applied consistently in code.
