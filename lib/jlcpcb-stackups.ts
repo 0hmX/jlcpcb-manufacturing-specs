@@ -1,68 +1,44 @@
-import type { PcbBoard, PcbStackupLayer } from "circuit-json"
+import type { PcbBoard } from "circuit-json"
+import type { JlcStackup } from "./jlc-stackup-builders"
+import * as twoLayerStackups from "./stackups/jlc-2-layer-stackups"
+import * as fourLayerStackups from "./stackups/jlc-4-layer-stackups"
+import * as sixLayerStackups from "./stackups/jlc-6-layer-stackups"
+import * as eightLayerStackups from "./stackups/jlc-8-layer-stackups"
 
-export interface JlcStackup {
-  name: string
-  num_layers: number
-  thickness: number
-  material: "fr4"
-  layers: PcbStackupLayer[]
-}
+export type { JlcStackup } from "./jlc-stackup-builders"
+export * from "./stackups/jlc-2-layer-stackups"
+export * from "./stackups/jlc-4-layer-stackups"
+export * from "./stackups/jlc-6-layer-stackups"
+export * from "./stackups/jlc-8-layer-stackups"
 
-export const jlc04161h3313Stackup: JlcStackup = {
-  name: "JLC04161H-3313",
-  num_layers: 4,
-  thickness: 1.6,
-  material: "fr4",
-  layers: [
-    {
-      layer_type: "copper",
-      layer: "top",
-      thickness: 0.035,
-      electrical_conductivity_s_per_m: 5.8e7,
-    },
-    {
-      layer_type: "dielectric",
-      dielectric_type: "prepreg",
-      material_name: "3313 RC57%",
-      thickness: 0.0994,
-      relative_permittivity: 4.1,
-    },
-    {
-      layer_type: "copper",
-      layer: "inner1",
-      thickness: 0.0152,
-      electrical_conductivity_s_per_m: 5.8e7,
-    },
-    {
-      layer_type: "dielectric",
-      dielectric_type: "core",
-      material_name: "NP-155F core",
-      thickness: 1.265,
-      relative_permittivity: 4.42,
-    },
-    {
-      layer_type: "copper",
-      layer: "inner2",
-      thickness: 0.0152,
-      electrical_conductivity_s_per_m: 5.8e7,
-    },
-    {
-      layer_type: "dielectric",
-      dielectric_type: "prepreg",
-      material_name: "3313 RC57%",
-      thickness: 0.0994,
-      relative_permittivity: 4.1,
-    },
-    {
-      layer_type: "copper",
-      layer: "bottom",
-      thickness: 0.035,
-      electrical_conductivity_s_per_m: 5.8e7,
-    },
-  ],
-}
-
-export const jlcStackups: JlcStackup[] = [jlc04161h3313Stackup]
+export const jlcStackups: JlcStackup[] = [
+  ...new Set([
+    fourLayerStackups.jlc04161h3313Stackup,
+    fourLayerStackups.jlc04061h2116Stackup,
+    fourLayerStackups.jlc04081h7628Stackup,
+    fourLayerStackups.jlc04101h7628Stackup,
+    fourLayerStackups.jlc04121h7628Stackup,
+    fourLayerStackups.jlc04201h7628Stackup,
+    fourLayerStackups.jlc04251h2116Stackup,
+    sixLayerStackups.jlc06061h3313Stackup,
+    sixLayerStackups.jlc06081h2116Stackup,
+    sixLayerStackups.jlc06101h3313Stackup,
+    sixLayerStackups.jlc06121h3313Stackup,
+    sixLayerStackups.jlc06161h3313Stackup,
+    sixLayerStackups.jlc06181h7628Stackup,
+    sixLayerStackups.jlc06201h3313Stackup,
+    eightLayerStackups.jlc08081h1080Stackup,
+    eightLayerStackups.jlc08101h3313Stackup,
+    eightLayerStackups.jlc08121h3313Stackup,
+    eightLayerStackups.jlc08161h2116Stackup,
+    eightLayerStackups.jlc08201h7628Stackup,
+    eightLayerStackups.jlc08301h7628Stackup,
+    ...Object.values(twoLayerStackups),
+    ...Object.values(fourLayerStackups),
+    ...Object.values(sixLayerStackups),
+    ...Object.values(eightLayerStackups),
+  ]),
+]
 
 export interface JlcBoardConstruction {
   num_layers: number
